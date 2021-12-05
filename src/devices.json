@@ -1,0 +1,189 @@
+[
+    {
+        "name": "Behringer QX2442USB",
+        "label": "Mixer",
+        "inputs": [
+            "Channel 1",
+            "Channel 2",
+            "Channel 3",
+            "Channel 4",
+            "Channel 5",
+            "Channel 6",
+            "Channel 7",
+            "Channel 8",
+            "Channel 9",
+            "Channel 10",
+            "Channel 11",
+            "Channel 12",
+            "Channel 13",
+            "Channel 14",
+            "Channel 15",
+            "Channel 16",
+            "RTN 1 L",
+            "RTN 1 R",
+            "RTN 2 L",
+            "RTN 2 R",
+            "RTN 3 L",
+            "RTN 3 R",
+            "RTN 4 L",
+            "RTN 4 R",
+            "Tape In L",
+            "Tape In R"
+        ],
+        "outputs": [
+            "Send 1",
+            "Send 2",
+            "Send 3",
+            "Send 4",
+            "Sub Group 1",
+            "Sub Group 2",
+            "Sub Group 3",
+            "Sub Group 4",
+            "Sub Group 5",
+            "Sub Group 6",
+            "Sub Group 7",
+            "Sub Group 8",
+            "Control Room L",
+            "Control Room R"
+        ]
+    },
+    {
+        "name": "Eurorack",
+        "inputs": [
+            "Input L",
+            "Input R"
+        ],
+        "output": [
+            "Output L",
+            "Output R"
+        ]
+    },
+    {
+        "name": "Mircofreak",
+        "inputs": [
+            "Mic"
+        ],
+        "output": [
+            "Output"
+        ]
+    },
+    {
+        "name": "Moog Sub 37",
+        "label": "Sub 37",
+        "inputs": [
+            "Input"
+        ],
+        "output": [
+            "Output"
+        ]
+    },
+    {
+        "name": "MPC One",
+        "inputs": [
+            "Input L",
+            "Input R"
+        ],
+        "output": [
+            "Output L",
+            "Output R"
+        ]
+    },
+    {
+        "name": "Deepmind 12D",
+        "output": [
+            "Output L",
+            "Output R"
+        ]
+    },
+    {
+        "name": "Kurzweil 2000",
+        "label": "K2000",
+        "inputs": [
+            "Input L",
+            "Input R"
+        ],
+        "output": [
+            "Output L",
+            "Output R"
+        ]
+    },
+    {
+        "name": "Analog Four",
+        "label": "A4",
+        "inputs": [
+            "Input L",
+            "Input R"
+        ],
+        "output": [
+            "Output L",
+            "Output R"
+        ]
+    },
+    {
+        "name": "Analog Rytm",
+        "label": "AR",
+        "inputs": [
+            "Input L",
+            "Input R"
+        ],
+        "output": [
+            "Output L",
+            "Output R"
+        ]
+    },
+    {
+        "name": "Octatrack",
+        "label": "OT",
+        "inputs": [
+            "Input 1 L",
+            "Input 1 R",
+            "Input 2 L",
+            "Input 2 R"
+        ],
+        "output": [
+            "Output L",
+            "Output R",
+            "Cue L",
+            "Cue R"
+        ]
+    },
+    {
+        "name": "iPad",
+        "inputs": [
+            "Input L",
+            "Input R"
+        ],
+        "output": [
+            "Output L",
+            "Output R"
+        ]
+    },
+    {
+        "name": "Focusrite Saffire 14 Pro",
+        "label": "DAW",
+        "inputs": [
+            "Input 1",
+            "Input 2",
+            "Input 3",
+            "Input 4"
+        ],
+        "output": [
+            "Output 1",
+            "Output 2",
+            "Output 3",
+            "Output 4"
+        ]
+    },
+    {
+        "name": "Source Audio Collider",
+        "label": "Collider",
+        "inputs": [
+            "Input L",
+            "Input R"
+        ],
+        "output": [
+            "Output L",
+            "Output R"
+        ]
+    }
+]
