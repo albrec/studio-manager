@@ -1,5 +1,6 @@
-import React from 'react';
-import { Devices } from './features/device/Devices';
+import React from 'react'
+import { Devices } from './features/device/Devices'
+import { Matrix } from './features/matrix/Matrix'
 import './App.css';
 
 function App() {
@@ -10,9 +11,10 @@ function App() {
       </header>
       <main>
         <Devices />
+        <Matrix />
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -5,6 +5,7 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import devicesReducer from '../features/device/devicesSlice'
+import linksReducer from '../features/matrix/linkSlice'
 
 const persistConfig = {
   key: 'root',
@@ -13,6 +14,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   devices: devicesReducer,
+  links: linksReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

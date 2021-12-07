@@ -1,4 +1,5 @@
 import React from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 export function OutputForm (props) {
     const { deviceData, setDeviceData } = props
@@ -32,7 +33,7 @@ export function OutputForm (props) {
         e.preventDefault()
         setDeviceData({
             ...deviceData,
-            outputs: (outputs || []).concat({}),
+            outputs: (outputs || []).concat({ id: uuidv4() }),
         })
     }
 
