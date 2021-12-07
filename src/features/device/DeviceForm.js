@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
+
+import { InputForm } from './InputForm'
+import { OutputForm } from './OutputForm'
 
 import {
     selectDevice,
@@ -11,16 +14,17 @@ export function DeviceForm (props) {
     const { id, done = () => {} } = props;
     const newDevice = !id;
     const device = useSelector(selectDevice(id)) || {}
-
     const [deviceData, setDeviceData] = useState(device)
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        if (device.id !== deviceData.id) {
+            setDeviceData(device)
+        }
+    }, [device, deviceData.id])
+
     const handleChange = (e) => {
-        const newVal = e.target.value.trim()
-        console.log('change', newVal, {
-            ...deviceData,
-            [e.target.name]: newVal
-        })
+        const newVal = e.target.value
         setDeviceData({
             ...deviceData,
             [e.target.name]: newVal
@@ -30,10 +34,8 @@ export function DeviceForm (props) {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (!deviceData.id) {
-            console.info('Add Device', deviceData)
             dispatch(addDevice(deviceData))
         } else {
-            console.info('Update Device', deviceData)
             dispatch(updateDevice(deviceData))
         }
         done()
@@ -48,9 +50,11 @@ export function DeviceForm (props) {
         <form onSubmit={ handleSubmit }>
             <fieldset>
                 <legend>{ newDevice ? "New Device" : device.name }</legend>
-                <input name="name" value={ deviceData.name } onChange={ handleChange } placeholder="Device name" />
+                <input name="name" value={ deviceData.name } onChange={ handleChange } placeholder="Device name" required={ true } />
                 <input name="label" value={ deviceData.label } onChange={ handleChange } placeholder="Optional: Short label (i.e. Mixer)" />
-                <button>Save</button>
+                <InputForm deviceData={ deviceData } setDeviceData={ setDeviceData } />
+                <OutputForm deviceData={ deviceData } setDeviceData={ setDeviceData } />
+                <input type="submit" value="Save" />
                 <button onClick={ handleCancel }>Cancel</button>
             </fieldset>
         </form>
