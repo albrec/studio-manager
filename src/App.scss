@@ -1,0 +1,74 @@
+:root {
+    --link-color: blue;
+    --button-color: rgb(236, 236, 236);
+}
+
+
+button,
+input[type="submit"] {
+    background-color: var(--button-color);
+    border: .25px solid black;
+    border-radius: .25em;
+    margin-right: 1em;
+    padding: .25em 1em;
+    cursor: pointer;
+}
+
+.btn-link {
+    background: none;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    color: var(--link-color);
+    cursor: pointer;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+.App-header {
+    background-color: lightgrey;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-bottom: 2px solid black;
+    padding: 1em 3em;
+
+    .ImportExport {
+        margin-left: 4em;
+    }
+}
+
+.tabs {
+    display: flex;
+    position: absolute;
+    bottom: -2px;
+    left: 1em;
+    list-style: none;
+    padding: 2em 2em 0;
+    margin: 0;
+    overflow: hidden;
+
+    button {
+        background-color: darkgrey;
+        position: relative;
+        bottom: 2px;
+        border-width: 2px 2px 0;
+        border-radius: 1em 1em 0 0;
+        color: rgb(54, 54, 54);
+        margin: 0 -1px 0 0;
+        font-weight: bold;
+
+        &.active {
+            background-color: white;
+            bottom: 0;
+            box-shadow: 0 0 0.5em black;
+            color: black;
+        }
+    }
+}
+
+main {
+    padding: 1em 3em;
+}

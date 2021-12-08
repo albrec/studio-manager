@@ -19,6 +19,9 @@ export const devicesSlice = createSlice({
     },
     removeDevice: (state, action) => {
         delete state[action.payload.id]
+    },
+    setDevices: (state, action) => {
+        return action.payload
     }
   },
 })
@@ -27,6 +30,7 @@ export const {
     addDevice,
     updateDevice,
     removeDevice,
+    setDevices,
  } = devicesSlice.actions
 
 // The function below is called a selector and allows us to select a value from

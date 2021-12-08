@@ -88,6 +88,10 @@
         --form-control-color: var(--form-control-conflicting);
         border-color: var(--form-control-conflicting);
     }
+
+    input[type="checkbox"].conflicting:checked {
+        background-color: var(--form-control-conflicting);
+    }
     
     input[type="checkbox"].patchbay {
         --form-control-color: var(--form-control-patchbay);
@@ -120,11 +124,17 @@
     }
 
     fieldset {
+        max-width: 70em;
         margin: 2em 0;
         font-size: .8em;
 
+        .checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
         label {
-            margin-right: 2em;
+            flex-basis: 25%;
 
             input {
                 position: relative;

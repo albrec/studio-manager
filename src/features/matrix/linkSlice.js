@@ -18,12 +18,16 @@ export const linksSlice = createSlice({
             state[key] = link
         }
         
+    },
+    setLinks: (state, action) => {
+        return action.payload
     }
   },
 })
 
 export const { 
     toggleLink,
+    setLinks,
  } = linksSlice.actions
 
 // The function below is called a selector and allows us to select a value from

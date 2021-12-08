@@ -63,15 +63,13 @@ export function Matrix () {
                 <p>An input or output can only support a single connection at a time. Other connection points for an input or output are disabled if a connection is made for that input or output to avoid conflicts.</p>
 
                 <div className="checkboxes">
-                    <label><input type="checkbox" checked={ false } /> No Connection</label>
-                    <label><input type="checkbox" checked={ true } /> Direct Connection</label>
-                    <label><input type="checkbox" checked={ true } className="patchbay" /> Through Patchbay</label>
-                </div>
-
-                <div className="checkboxes">
-                    <label><input type="checkbox" checked={ false } className="stereoIncompatible" /> Stereo Incompatiblity</label>
-                    <label><input type="checkbox" checked={ false } className="balancedIncompatible" /> Balanced Incompatiblity</label>
-                    <label><input type="checkbox" checked={ false } disabled={ true } /> Disabled</label>
+                    <label><input type="checkbox" readOnly={ true } checked={ false } /> No Connection</label>
+                    <label><input type="checkbox" readOnly={ true } checked={ true } /> Direct Connection</label>
+                    <label><input type="checkbox" readOnly={ true } checked={ true } className="patchbay" /> Through Patchbay</label>
+                    <label><input type="checkbox" readOnly={ true } checked={ false } disabled={ true } /> Disabled</label>
+                    <label><input type="checkbox" readOnly={ true } checked={ false } className="stereoIncompatible" /> Stereo Incompatiblity</label>
+                    <label><input type="checkbox" readOnly={ true } checked={ false } className="balancedIncompatible" /> Balanced Incompatiblity</label>
+                    <label><input type="checkbox" readOnly={ true } checked={ true } className="conflicting" /> Conflicting Connection</label>
                 </div>
             </fieldset>
             
