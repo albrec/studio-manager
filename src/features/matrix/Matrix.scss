@@ -25,6 +25,14 @@
         text-align: right;
     }
 
+    th abbr {
+        position: relative;
+        color: gray;
+        font-size: .5em;
+        vertical-align: super;
+        cursor: help;
+    }
+
     tr:first-of-type th {
         writing-mode: vertical-rl;
         text-orientation: mixed;
@@ -84,6 +92,31 @@
     input[type="checkbox"].patchbay {
         --form-control-color: var(--form-control-patchbay);
         border-color: var(--form-control-patchbay);
+    }
+
+    input[type="checkbox"].balancedIncompatible:checked,
+    input[type="checkbox"].stereoIncompatible:checked {
+        position: relative;
+    }
+
+    input[type="checkbox"].balancedIncompatible:checked::after,
+    input[type="checkbox"].stereoIncompatible:checked::after {
+        content: "!";
+        color: white;
+        font-weight: bold;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    input[type="checkbox"].balancedIncompatible {
+        border-style: dotted;
+    }
+
+    input[type="checkbox"].stereoIncompatible {
+        border-style: dashed;
     }
 
     fieldset {

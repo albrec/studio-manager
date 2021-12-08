@@ -33,13 +33,23 @@ export function Matrix () {
                     <tr>
                         <th></th>
                         { inputs.map(input => (
-                            <th>{ input.device.label || input.device.name } { input.name }</th>
+                            <th>
+                                { input.device.label || input.device.name }&nbsp;
+                                { input.name }&nbsp;
+                                { input.balanced && <abbr title="Balanced">B</abbr> }&nbsp;
+                                { input.balanced && <abbr title="Stereo">St</abbr> }
+                            </th>
                         ))}
                     </tr>
 
                     { outputs.map(output => (
                         <tr>
-                            <th>{ output.device.label || output.device.name } { output.name }</th>
+                            <th>
+                                { output.device.label || output.device.name }&nbsp;
+                                { output.name }&nbsp;
+                                { output.balanced && <abbr title="Balanced">B</abbr> }&nbsp;
+                                { output.balanced && <abbr title="Stereo">St</abbr> }
+                            </th>
                             { inputs.map(input => <LinkNode input={ input } output={ output } />)}
                         </tr>
                     ))}
@@ -56,6 +66,11 @@ export function Matrix () {
                     <label><input type="checkbox" checked={ false } /> No Connection</label>
                     <label><input type="checkbox" checked={ true } /> Direct Connection</label>
                     <label><input type="checkbox" checked={ true } className="patchbay" /> Through Patchbay</label>
+                </div>
+
+                <div className="checkboxes">
+                    <label><input type="checkbox" checked={ false } className="stereoIncompatible" /> Stereo Incompatiblity</label>
+                    <label><input type="checkbox" checked={ false } className="balancedIncompatible" /> Balanced Incompatiblity</label>
                     <label><input type="checkbox" checked={ false } disabled={ true } /> Disabled</label>
                 </div>
             </fieldset>
@@ -72,11 +87,20 @@ function LinkNode (props) {
     const outputLinked = useSelector(isOutputLinked(output))
     const conflicting = useSelector(hasConflict({ input, output }))
 
+    const balancedIncompatible =  input.balanced !== output.balanced
+    const stereoIncompatible = input.stereo !== output.stereo
+
     const dispatch = useDispatch()
 
     return (
         <td>
-            <input type="checkbox" checked={ linked } disabled={ !linked && (inputLinked || outputLinked) } className={ classNames({ conflicting, patchbay }) } onChange={ (e) => dispatch(toggleLink({ input, output }))} />
+            <input
+                type="checkbox"
+                checked={ linked }
+                disabled={ !linked && (inputLinked || outputLinked) }
+                className={ classNames({ conflicting, patchbay, balancedIncompatible, stereoIncompatible }) }
+                onChange={ (e) => dispatch(toggleLink({ input, output }))}
+            />
         </td>
     )
 }
