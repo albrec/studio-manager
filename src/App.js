@@ -1,7 +1,7 @@
 import React from 'react'
 import { Devices } from './features/device/Devices'
 import { Matrix } from './features/matrix/Matrix'
-import './App.css';
+import './App.css'
 
 function App() {
   return (

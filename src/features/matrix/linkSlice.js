@@ -10,8 +10,10 @@ export const linksSlice = createSlice({
     toggleLink: (state, action) => {
         const link = action.payload
         const key = linkKey(link)
-        if (state[key]) {
+        if (state[key] && state[key].patchbay) {
             delete state[key]
+        } else if (state[key] && !state[key].patchbay) {
+            state[key].patchbay = true
         } else {
             state[key] = link
         }
@@ -29,6 +31,10 @@ export const {
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const isLinked = (link) => (state) => {
     return !!state.links[linkKey(link)]
+}
+
+export const isThroughPatchbay = (link) => (state) => {
+    return !!state.links[linkKey(link)]?.patchbay
 }
 
 export const isInputLinked = (input) => (state) => {

@@ -50,8 +50,10 @@ export function DeviceForm (props) {
         <form onSubmit={ handleSubmit }>
             <fieldset>
                 <legend>{ newDevice ? "New Device" : device.name }</legend>
-                <label>Name <input name="name" value={ deviceData.name } onChange={ handleChange } placeholder="Device name" required={ true } /></label>
-                <label>Label <input name="label" value={ deviceData.label } onChange={ handleChange } placeholder="Optional: Short label (i.e. Mixer)" /></label>
+                <div className="device-fields">
+                    <label>Name <input name="name" value={ deviceData.name } onChange={ handleChange } placeholder="Device name" required={ true } /></label>
+                    <label>Label <input name="label" value={ deviceData.label } onChange={ handleChange } placeholder="Optional: Short label (i.e. Mixer)" /></label>
+                </div>
                 <InputForm deviceData={ deviceData } setDeviceData={ setDeviceData } />
                 <OutputForm deviceData={ deviceData } setDeviceData={ setDeviceData } />
                 <input type="submit" value="Save" />

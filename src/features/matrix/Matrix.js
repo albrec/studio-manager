@@ -1,6 +1,9 @@
 import { useSelector, useDispatch } from "react-redux"
 import { selectDevices } from "../device/devicesSlice"
-import { toggleLink, isLinked, isInputLinked, isOutputLinked, hasConflict } from "./linkSlice"
+import { toggleLink, isLinked, isInputLinked, isOutputLinked, hasConflict, isThroughPatchbay } from "./linkSlice"
+import classNames from "classnames"
+
+import './Matrix.scss'
 
 export function Matrix () {
 
@@ -22,7 +25,7 @@ export function Matrix () {
     }, [])
 
     return (
-        <section>
+        <section className='Matrix'>
             <h2>IO Matrix</h2>
             <table>
                 <tbody>
@@ -44,6 +47,19 @@ export function Matrix () {
 
                 </tbody>
             </table>
+
+            <fieldset>
+                <legend>Matrix Legend</legend>
+                <p>An input or output can only support a single connection at a time. Other connection points for an input or output are disabled if a connection is made for that input or output to avoid conflicts.</p>
+
+                <div className="checkboxes">
+                    <label><input type="checkbox" checked={ false } /> No Connection</label>
+                    <label><input type="checkbox" checked={ true } /> Direct Connection</label>
+                    <label><input type="checkbox" checked={ true } className="patchbay" /> Through Patchbay</label>
+                    <label><input type="checkbox" checked={ false } disabled={ true } /> Disabled</label>
+                </div>
+            </fieldset>
+            
         </section>
     )
 }
@@ -51,17 +67,16 @@ export function Matrix () {
 function LinkNode (props) {
     const { input, output } = props
     const linked = useSelector(isLinked({ input, output }))
+    const patchbay = useSelector(isThroughPatchbay({ input, output }))
     const inputLinked = useSelector(isInputLinked(input))
     const outputLinked = useSelector(isOutputLinked(output))
     const conflicting = useSelector(hasConflict({ input, output }))
-
-    console.log('linked', linked, 'conflicting', conflicting)
 
     const dispatch = useDispatch()
 
     return (
         <td>
-            <input type="checkbox" checked={ linked } disabled={ !linked && (inputLinked || outputLinked) } className={ conflicting && 'conflicting' } onChange={ (e) => dispatch(toggleLink({ input, output }))} />
+            <input type="checkbox" checked={ linked } disabled={ !linked && (inputLinked || outputLinked) } className={ classNames({ conflicting, patchbay }) } onChange={ (e) => dispatch(toggleLink({ input, output }))} />
         </td>
     )
 }

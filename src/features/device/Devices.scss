@@ -1,0 +1,42 @@
+.Devices {
+
+    ul {
+        padding: 0;
+    }
+
+    li {
+        margin: 1em 1em;
+
+        .btn-link {
+            margin: .25em 1em .25em 0;
+            font-size: .75em;
+        }
+    }
+
+    form {
+        margin: 1em 0;
+
+        fieldset {
+            margin: 1em 0;
+        }
+
+        .device-fields {
+            label {
+                display: block;
+                margin: .5em 0;
+
+                input {
+                    margin-left: 1em;
+                }
+            }
+        }
+
+        ol, ul {
+            padding: 0;
+        }
+
+        li label {
+            margin: 0 1em;
+        }
+    }
+}

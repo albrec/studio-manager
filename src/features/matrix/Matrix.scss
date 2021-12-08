@@ -1,0 +1,110 @@
+.Matrix {
+    --form-control-color: currentColor;
+    --form-control-disabled: lightgrey;
+    --form-control-patchbay: blue;
+    --form-control-conflicting: red;
+
+    table {
+        font-size: .8em;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: .1em .25em;
+        text-align: center;
+        vertical-align: center;
+    }
+
+    td {
+        border: 1px solid lightgrey;
+        padding: .5em;
+    }
+
+    th {
+        white-space: nowrap;
+        text-align: right;
+    }
+
+    tr:first-of-type th {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: translate(2.5em, .25em) rotate(210deg);
+        text-align: left;
+    }
+
+    tr:nth-child(even) td {
+        background-color: rgba(0,0,0,0.05);
+    }
+
+    input[type="checkbox"] {
+        /* Add if not using autoprefixer */
+        -webkit-appearance: none;
+        /* Remove most all native input styles */
+        appearance: none;
+        /* For iOS < 15 */
+        background-color: var(--form-background);
+        /* Not removed via appearance */
+        margin: 0;
+        font: inherit;
+        color: currentColor;
+        width: 1.15em;
+        height: 1.15em;
+        border: 0.15em solid currentColor;
+        border-radius: 0.15em;
+        transition: all 250ms ease-in-out;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    input[type="checkbox"]:checked {
+        background-color: currentColor;
+    }
+
+    input[type="checkbox"].patchbay:checked {
+        background-color: var(--form-control-patchbay);
+    }
+    
+    input[type="checkbox"]:focus {
+        outline: max(2px, 0.15em) solid currentColor;
+        outline-offset: max(2px, 0.15em);
+    }
+    
+    input[type="checkbox"]:disabled {
+        --form-control-color: var(--form-control-disabled);
+    
+        color: var(--form-control-disabled);
+        cursor: not-allowed;
+    }
+    
+    input[type="checkbox"].conflicting {
+        --form-control-color: var(--form-control-conflicting);
+        border-color: var(--form-control-conflicting);
+    }
+    
+    input[type="checkbox"].patchbay {
+        --form-control-color: var(--form-control-patchbay);
+        border-color: var(--form-control-patchbay);
+    }
+
+    fieldset {
+        margin: 2em 0;
+        font-size: .8em;
+
+        label {
+            margin-right: 2em;
+
+            input {
+                position: relative;
+                top: .2em;
+            }
+        }
+
+        p {
+            font-size: .8em;
+            font-style: italic;
+        }
+    }
+    
+}
+
+

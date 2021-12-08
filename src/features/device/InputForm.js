@@ -56,10 +56,10 @@ export function InputForm (props) {
                 <ol>
                     { inputs.map((input, i) => (
                         <li key={ `${deviceData.id}-input-${i}` }>
-                            <input name="name" value={ input.name } placeholder="Input name" onChange={ (e) => onChangeInput(e, i) } required={ true } />
+                            <input name="name" value={ input.name || "Input" } placeholder="Input name" onChange={ (e) => onChangeInput(e, i) } required={ true } />
                             <label>Stereo <input name="stereo" checked={ !!input.stereo } type="checkbox" onChange={ (e) => onChangeCheckbox(e, i) } /></label>
                             <label>Balanced <input name="balanced" checked={ !!input.balanced } type="checkbox" onChange={ (e) => onChangeCheckbox(e, i) } /></label>
-                            <button onClick={ (e) => onDelete(e, i) }>Delete</button>
+                            <button onClick={ (e) => onDelete(e, i) } className="btn-link">Delete</button>
                         </li>
                     ))}
                 </ol>

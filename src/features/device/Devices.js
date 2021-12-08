@@ -7,6 +7,8 @@ import {
 
 import { DeviceForm } from './DeviceForm';
 
+import './Devices.scss'
+
 export function Devices () {
     const dispatch = useDispatch()
 
@@ -31,7 +33,7 @@ export function Devices () {
     }
 
     return (
-        <section>
+        <section className="Devices">
             <h2>Devices ({ deviceCount })</h2>
             { deviceCount === 0 ? (
                 <div>No devices defined</div>
@@ -39,20 +41,22 @@ export function Devices () {
                 <ul>
                     { devices.map(device => (
                         <li key={ device.id }>
-                            { device.name }
-                            <button onClick={ (e) => openForm(device.id) }>Edit</button>
-                            <button onClick={ (e) => dispatch(removeDevice(device)) }>Delete</button>
+                            <div><strong>{ device.name }</strong> | Inputs: { device.inputs?.length || 0 } | Outputs: { device.outputs?.length || 0 }</div>
+                            <button onClick={ (e) => openForm(device.id) } className="btn-link">Edit</button>
+                            <button onClick={ (e) => dispatch(removeDevice(device)) } className="btn-link">Delete</button>
                         </li>
                     )) }
                 </ul>
             )}
-            <button onClick={ (e) => openForm() }>New Device</button>
+            
             { addingDevice && (
                 <DeviceForm done={ closeForm } />
             ) }
             { editingDevice && (
                 <DeviceForm id={ editingDevice } done={ closeForm } />
             ) }
+
+            { (!addingDevice && !editingDevice) && <button onClick={ (e) => openForm() }>New Device</button> }
         </section>
     )
 }
