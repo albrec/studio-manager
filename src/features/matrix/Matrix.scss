@@ -21,8 +21,12 @@
     }
 
     th {
+        background-color: white;
+        position: sticky;
+        left: 0;
         white-space: nowrap;
         text-align: right;
+        z-index: 9;
     }
 
     th abbr {
@@ -33,11 +37,37 @@
         cursor: help;
     }
 
-    tr:first-of-type th {
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-        transform: translate(2.5em, .25em) rotate(210deg);
+    thead tr {
+        background-color: white;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        box-shadow: 0 1px 0px lightgrey;
+    }
+
+    thead th {
+        background-color: transparent;
+        position: relative;
+        left: auto;
+        height: 10em;
         text-align: left;
+        border-bottom: 1px solid lightgrey;
+        border-right: 0;
+        overflow: visible;
+    }
+
+    thead th > * {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform-origin: bottom left;
+        transform: translate(2.25em, 0em) rotate(-45deg);
+        border-bottom: 1px solid lightgrey;
+        min-width: 15em;
+    }
+
+    thead tr th:first-of-type {
+        background-color: none;
     }
 
     tr:nth-child(even) td {

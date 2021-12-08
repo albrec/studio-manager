@@ -28,20 +28,22 @@ export function Matrix () {
         <section className='Matrix'>
             <h2>IO Matrix</h2>
             <table>
-                <tbody>
-
+                <thead>
                     <tr>
                         <th></th>
                         { inputs.map(input => (
                             <th>
-                                { input.device.label || input.device.name }&nbsp;
-                                { input.name }&nbsp;
-                                { input.balanced && <abbr title="Balanced">B</abbr> }&nbsp;
-                                { input.balanced && <abbr title="Stereo">St</abbr> }
+                                <div>
+                                    { input.device.label || input.device.name }&nbsp;
+                                    { input.name }&nbsp;
+                                    { input.balanced && <abbr title="Balanced">B</abbr> }&nbsp;
+                                    { input.balanced && <abbr title="Stereo">St</abbr> }
+                                </div>
                             </th>
                         ))}
                     </tr>
-
+                </thead>
+                <tbody>
                     { outputs.map(output => (
                         <tr>
                             <th>
@@ -53,8 +55,6 @@ export function Matrix () {
                             { inputs.map(input => <LinkNode input={ input } output={ output } />)}
                         </tr>
                     ))}
-
-
                 </tbody>
             </table>
 
