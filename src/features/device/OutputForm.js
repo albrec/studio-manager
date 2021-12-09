@@ -1,5 +1,6 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { arrayMoveImmutable } from 'array-move'
 
 export function OutputForm (props) {
     const { deviceData, setDeviceData } = props
@@ -46,6 +47,22 @@ export function OutputForm (props) {
         })
     }
 
+    const onShiftUp = (e, i) => {
+        e.preventDefault()
+        setDeviceData({
+            ...deviceData,
+            outputs: arrayMoveImmutable(outputs, i, i - 1)
+        })
+    }
+
+    const onShiftDown = (e, i) => {
+        e.preventDefault()
+        setDeviceData({
+            ...deviceData,
+            outputs: arrayMoveImmutable(outputs, i, i + 1)
+        })
+    }
+
     return (
         <fieldset>
             <legend>Outputs</legend>
@@ -59,8 +76,8 @@ export function OutputForm (props) {
                             <label>Balanced <input name="balanced" checked={ !!output.balanced } type="checkbox" onChange={ (e) => onChangeCheckbox(e, i) } /></label>
                             <button onClick={ (e) => onDelete(e, i) } className="btn-link">Delete</button>
                             <div className="arrows">
-                                <button className="btn-link" onClick={(e) => {} }>˄</button>
-                                <button className="btn-link" onClick={(e) => {} }>˅</button>
+                                <button className="btn-link" onClick={(e) => onShiftUp(e, i) }>˄</button>
+                                <button className="btn-link" onClick={(e) => onShiftDown(e, i) }>˅</button>
                             </div>
                         </li>
                     ))}
