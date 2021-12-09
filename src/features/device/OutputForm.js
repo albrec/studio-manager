@@ -56,9 +56,12 @@ export function OutputForm (props) {
                     { outputs.map((output, i) => (
                         <li key={ `${deviceData.id}-input-${i}` }>
                             <input name="name" value={ output.name || "Output" } placeholder="Output name" onChange={ (e) => onChange(e, i) } required={ true } />
-                            <label>Stereo <input name="stereo" checked={ !!output.stereo } type="checkbox" onChange={ (e) => onChangeCheckbox(e, i) } /></label>
                             <label>Balanced <input name="balanced" checked={ !!output.balanced } type="checkbox" onChange={ (e) => onChangeCheckbox(e, i) } /></label>
                             <button onClick={ (e) => onDelete(e, i) } className="btn-link">Delete</button>
+                            <div className="arrows">
+                                <button className="btn-link" onClick={(e) => {} }>˄</button>
+                                <button className="btn-link" onClick={(e) => {} }>˅</button>
+                            </div>
                         </li>
                     ))}
                 </ol>

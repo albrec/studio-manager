@@ -27,3 +27,12 @@ export const store = configureStore({
 })
 
 export const persistor = persistStore(store)
+
+
+// store.dispatch((dispatch, getState) => {
+//   const state = getState()
+//   const devicesSorted = Object.values(state.devices).sort((a,b) => a.idx - b.idx)
+//   devicesSorted.forEach((device, i) => {
+
+//   })
+// })

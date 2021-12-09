@@ -5,7 +5,22 @@
     }
 
     li {
+        display: flex;
+        align-items: center;
         margin: 1em 1em;
+
+        & > * {
+            margin: 0 .5em;
+        }
+
+        .arrows {
+            display: flex;
+            flex-direction: column;
+            
+            .btn-link {
+                margin: -.15em 0;
+            }
+        }
 
         .btn-link {
             margin: .25em 1em .25em 0;
@@ -39,4 +54,5 @@
             margin: 0 1em;
         }
     }
+    
 }

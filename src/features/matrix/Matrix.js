@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
-import { selectDevices } from "../device/devicesSlice"
+import { selectDevicesSorted } from "../device/devicesSlice"
 import { toggleLink, isLinked, isInputLinked, isOutputLinked, hasConflict, isThroughPatchbay } from "./linkSlice"
 import classNames from "classnames"
 
@@ -7,7 +7,7 @@ import './Matrix.scss'
 
 export function Matrix () {
 
-    const devices = useSelector(selectDevices)
+    const devices = useSelector(selectDevicesSorted)
     const inputs = devices.reduce((accum, device) => {
         if (device.inputs) {
             return accum.concat(device.inputs.map(input => Object.assign({}, input, { device }) ))
@@ -37,7 +37,6 @@ export function Matrix () {
                                     { input.device.label || input.device.name }&nbsp;
                                     { input.name }&nbsp;
                                     { input.balanced && <abbr title="Balanced">B</abbr> }&nbsp;
-                                    { input.balanced && <abbr title="Stereo">St</abbr> }
                                 </div>
                             </th>
                         ))}
@@ -50,7 +49,6 @@ export function Matrix () {
                                 { output.device.label || output.device.name }&nbsp;
                                 { output.name }&nbsp;
                                 { output.balanced && <abbr title="Balanced">B</abbr> }&nbsp;
-                                { output.balanced && <abbr title="Stereo">St</abbr> }
                             </th>
                             { inputs.map(input => <LinkNode input={ input } output={ output } />)}
                         </tr>
@@ -67,7 +65,6 @@ export function Matrix () {
                     <label><input type="checkbox" readOnly={ true } checked={ true } /> Direct Connection</label>
                     <label><input type="checkbox" readOnly={ true } checked={ true } className="patchbay" /> Through Patchbay</label>
                     <label><input type="checkbox" readOnly={ true } checked={ false } disabled={ true } /> Disabled</label>
-                    <label><input type="checkbox" readOnly={ true } checked={ false } className="stereoIncompatible" /> Stereo Incompatiblity</label>
                     <label><input type="checkbox" readOnly={ true } checked={ false } className="balancedIncompatible" /> Balanced Incompatiblity</label>
                     <label><input type="checkbox" readOnly={ true } checked={ true } className="conflicting" /> Conflicting Connection</label>
                 </div>
@@ -86,7 +83,6 @@ function LinkNode (props) {
     const conflicting = useSelector(hasConflict({ input, output }))
 
     const balancedIncompatible =  input.balanced !== output.balanced
-    const stereoIncompatible = input.stereo !== output.stereo
 
     const dispatch = useDispatch()
 
@@ -96,7 +92,7 @@ function LinkNode (props) {
                 type="checkbox"
                 checked={ linked }
                 disabled={ !linked && (inputLinked || outputLinked) }
-                className={ classNames({ conflicting, patchbay, balancedIncompatible, stereoIncompatible }) }
+                className={ classNames({ conflicting, patchbay, balancedIncompatible }) }
                 onChange={ (e) => dispatch(toggleLink({ input, output }))}
             />
         </td>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { arrayMoveImmutable } from 'array-move'
 
 
 export function InputForm (props) {
@@ -47,6 +48,22 @@ export function InputForm (props) {
         })
     }
 
+    const onShiftUp = (e, i) => {
+        e.preventDefault()
+        setDeviceData({
+            ...deviceData,
+            inputs: arrayMoveImmutable(inputs, i, i - 1)
+        })
+    }
+
+    const onShiftDown = (e, i) => {
+        e.preventDefault()
+        setDeviceData({
+            ...deviceData,
+            inputs: arrayMoveImmutable(inputs, i, i + 1)
+        })
+    }
+
     return (
         <fieldset>
             <legend>Inputs</legend>
@@ -57,9 +74,12 @@ export function InputForm (props) {
                     { inputs.map((input, i) => (
                         <li key={ `${deviceData.id}-input-${i}` }>
                             <input name="name" value={ input.name || "Input" } placeholder="Input name" onChange={ (e) => onChangeInput(e, i) } required={ true } />
-                            <label>Stereo <input name="stereo" checked={ !!input.stereo } type="checkbox" onChange={ (e) => onChangeCheckbox(e, i) } /></label>
                             <label>Balanced <input name="balanced" checked={ !!input.balanced } type="checkbox" onChange={ (e) => onChangeCheckbox(e, i) } /></label>
                             <button onClick={ (e) => onDelete(e, i) } className="btn-link">Delete</button>
+                            <div className="arrows">
+                                <button className="btn-link" onClick={(e) => onShiftUp(e, i) }>˄</button>
+                                <button className="btn-link" onClick={(e) => onShiftDown(e, i) }>˅</button>
+                            </div>
                         </li>
                     ))}
                 </ol>

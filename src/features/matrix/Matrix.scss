@@ -128,13 +128,11 @@
         border-color: var(--form-control-patchbay);
     }
 
-    input[type="checkbox"].balancedIncompatible:checked,
-    input[type="checkbox"].stereoIncompatible:checked {
+    input[type="checkbox"].balancedIncompatible:checked {
         position: relative;
     }
 
-    input[type="checkbox"].balancedIncompatible:checked::after,
-    input[type="checkbox"].stereoIncompatible:checked::after {
+    input[type="checkbox"].balancedIncompatible:checked::after {
         content: "!";
         color: white;
         font-weight: bold;
@@ -146,10 +144,6 @@
     }
 
     input[type="checkbox"].balancedIncompatible {
-        border-style: dotted;
-    }
-
-    input[type="checkbox"].stereoIncompatible {
         border-style: dashed;
     }
 

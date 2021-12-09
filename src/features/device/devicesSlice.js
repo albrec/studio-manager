@@ -21,7 +21,32 @@ export const devicesSlice = createSlice({
         delete state[action.payload.id]
     },
     setDevices: (state, action) => {
-        return action.payload
+        const devices = action.payload
+        const devicesSorted = Object.values(devices).sort((a,b) => a.idx || 0 - b.idx || 0)
+        devicesSorted.forEach((device, i) => {
+            devices[device.id].idx = i
+        })
+        return devices
+    },
+    shiftUp: (state, action) => {
+        const currentIndex = state[action.payload.id].idx
+        Object.keys(state).forEach((k) => {
+            if (state[k].idx === currentIndex) {
+                state[k].idx--
+            } else if (state[k].idx === currentIndex - 1) {
+                state[k].idx++
+            }
+        })
+    },
+    shiftDown: (state, action) => {
+        const currentIndex = state[action.payload.id].idx
+        Object.keys(state).forEach((k) => {
+            if (state[k].idx === currentIndex) {
+                state[k].idx++
+            } else if (state[k].idx === currentIndex + 1) {
+                state[k].idx--
+            }
+        })
     }
   },
 })
@@ -31,6 +56,8 @@ export const {
     updateDevice,
     removeDevice,
     setDevices,
+    shiftUp,
+    shiftDown,
  } = devicesSlice.actions
 
 // The function below is called a selector and allows us to select a value from
@@ -38,5 +65,7 @@ export const {
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectDevices = (state) => Object.values(state.devices)
 export const selectDevice = (id) => (state) => state.devices[id]
+
+export const selectDevicesSorted = (state) => Object.values(state.devices).sort((a,b) =>( a.idx || 0) - (b.idx || 0))
 
 export default devicesSlice.reducer

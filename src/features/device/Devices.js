@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  selectDevices,
-  removeDevice,
+    selectDevicesSorted,
+    removeDevice,
+    shiftUp,
+    shiftDown,
 } from './devicesSlice';
 
 import { DeviceForm } from './DeviceForm';
 
 import './Devices.scss'
 
-export function Devices () {
+export function Devices() {
     const dispatch = useDispatch()
 
-    const devices = useSelector(selectDevices);
+    const devices = useSelector(selectDevicesSorted);
     const deviceCount = devices.length
 
     const [addingDevice, setAddingDevice] = useState(false)
@@ -34,29 +36,33 @@ export function Devices () {
 
     return (
         <section className="Devices">
-            <h2>Devices ({ deviceCount })</h2>
-            { deviceCount === 0 ? (
+            <h2>Devices ({deviceCount})</h2>
+            {deviceCount === 0 ? (
                 <div>No devices defined</div>
             ) : (
                 <ul>
-                    { devices.map(device => (
-                        <li key={ device.id }>
-                            <div><strong>{ device.name }</strong> | Inputs: { device.inputs?.length || 0 } | Outputs: { device.outputs?.length || 0 }</div>
-                            <button onClick={ (e) => openForm(device.id) } className="btn-link">Edit</button>
-                            <button onClick={ (e) => dispatch(removeDevice(device)) } className="btn-link">Delete</button>
+                    {devices.map(device => (
+                        <li key={device.id}>
+                            <div><strong>{device.name}</strong> | Inputs: {device.inputs?.length || 0} | Outputs: {device.outputs?.length || 0}</div>
+                            <button onClick={(e) => openForm(device.id)} className="btn-link">Edit</button>
+                            <button onClick={(e) => dispatch(removeDevice(device))} className="btn-link">Delete</button>
+                            <div className="arrows">
+                                <button className="btn-link" onClick={(e) => dispatch(shiftUp(device))}>˄</button>
+                                <button className="btn-link" onClick={(e) => dispatch(shiftDown(device))}>˅</button>
+                            </div>
                         </li>
-                    )) }
+                    ))}
                 </ul>
             )}
-            
-            { addingDevice && (
-                <DeviceForm done={ closeForm } />
-            ) }
-            { editingDevice && (
-                <DeviceForm id={ editingDevice } done={ closeForm } />
-            ) }
 
-            { (!addingDevice && !editingDevice) && <button onClick={ (e) => openForm() }>New Device</button> }
+            {addingDevice && (
+                <DeviceForm done={closeForm} />
+            )}
+            {editingDevice && (
+                <DeviceForm id={editingDevice} done={closeForm} />
+            )}
+
+            {(!addingDevice && !editingDevice) && <button onClick={(e) => openForm()}>New Device</button>}
         </section>
     )
 }
