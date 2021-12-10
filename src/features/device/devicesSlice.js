@@ -11,6 +11,7 @@ export const devicesSlice = createSlice({
         const device = {
             ...action.payload,
             id: uuidv4(),
+            idx: Object.keys(state).length,
         }
         state[device.id] = device
     },

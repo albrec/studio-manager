@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { selectDevicesSorted } from "../device/devicesSlice"
 import { toggleLink, isLinked, isInputLinked, isOutputLinked, hasConflict, isThroughPatchbay } from "./linkSlice"
@@ -6,6 +7,8 @@ import classNames from "classnames"
 import './Matrix.scss'
 
 export function Matrix () {
+
+    const [hoverNode, setHoverNode] = useState({})
 
     const devices = useSelector(selectDevicesSorted)
     const inputs = devices.reduce((accum, device) => {
@@ -32,12 +35,8 @@ export function Matrix () {
                     <tr>
                         <th></th>
                         { inputs.map(input => (
-                            <th>
-                                <div>
-                                    { input.device.label || input.device.name }&nbsp;
-                                    { input.name }&nbsp;
-                                    { input.balanced && <abbr title="Balanced">B</abbr> }&nbsp;
-                                </div>
+                            <th className={ classNames({ hovered: hoverNode.input?.id === input.id }) }>
+                                <InputLabel input={ input } />
                             </th>
                         ))}
                     </tr>
@@ -45,12 +44,10 @@ export function Matrix () {
                 <tbody>
                     { outputs.map(output => (
                         <tr>
-                            <th>
-                                { output.device.label || output.device.name }&nbsp;
-                                { output.name }&nbsp;
-                                { output.balanced && <abbr title="Balanced">B</abbr> }&nbsp;
+                            <th className={ classNames({ hovered: hoverNode.output?.id === output.id }) }>
+                                <OutputLabel output={ output } />
                             </th>
-                            { inputs.map(input => <LinkNode input={ input } output={ output } />)}
+                            { inputs.map(input => <LinkNode input={ input } output={ output } onMouseEnter={ setHoverNode } />)}
                         </tr>
                     ))}
                 </tbody>
@@ -74,8 +71,34 @@ export function Matrix () {
     )
 }
 
+function InputLabel (props) {
+    const input = props.input
+    const linked = useSelector(isInputLinked(input))
+
+    return (
+        <div className={ classNames({ linked }) }>
+            { input.device.label || input.device.name }&nbsp;
+            { input.name }&nbsp;
+            {/* { input.balanced && <abbr title="Balanced">B</abbr> }&nbsp; */}
+        </div>
+    )
+}
+
+function OutputLabel (props) {
+    const output = props.output
+    const linked = useSelector(isOutputLinked(output))
+
+    return (
+        <div className={ classNames({ linked }) }>
+            { output.device.label || output.device.name }&nbsp;
+            { output.name }&nbsp;
+            {/* { output.balanced && <abbr title="Balanced">B</abbr> }&nbsp; */}
+        </div>
+    )
+}
+
 function LinkNode (props) {
-    const { input, output } = props
+    const { input, output, onMouseEnter } = props
     const linked = useSelector(isLinked({ input, output }))
     const patchbay = useSelector(isThroughPatchbay({ input, output }))
     const inputLinked = useSelector(isInputLinked(input))
@@ -87,7 +110,7 @@ function LinkNode (props) {
     const dispatch = useDispatch()
 
     return (
-        <td>
+        <td onMouseEnter={ (e) => { onMouseEnter({ input, output }); console.log('mouse event', input, output) } }>
             <input
                 type="checkbox"
                 checked={ linked }
