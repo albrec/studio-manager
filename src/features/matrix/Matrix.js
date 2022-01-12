@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { selectDevicesSorted } from "../device/devicesSlice"
-import { toggleLink, isLinked, isInputLinked, isOutputLinked, hasConflict, isThroughPatchbay } from "./linkSlice"
+import { toggleLink, isLinked, isInputLinked, isOutputLinked, hasConflict, isThroughPatchbay, getStats } from "./linkSlice"
 import classNames from "classnames"
 
 import './Matrix.scss'
@@ -26,6 +26,8 @@ export function Matrix () {
             return accum
         }
     }, [])
+
+    const stats = useSelector(getStats)
 
     return (
         <section className='Matrix'>
@@ -65,6 +67,13 @@ export function Matrix () {
                     <label><input type="checkbox" readOnly={ true } checked={ false } className="balancedIncompatible" /> Balanced Incompatiblity</label>
                     <label><input type="checkbox" readOnly={ true } checked={ true } className="conflicting" /> Conflicting Connection</label>
                 </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Stats</legend>
+
+                <div><label>Patch Inputs: { stats.patchbay.inputs }</label></div>
+                <div><label>Patch Outputs: { stats.patchbay.outputs }</label></div>
             </fieldset>
             
         </section>

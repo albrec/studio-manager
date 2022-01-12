@@ -55,6 +55,15 @@ export const hasConflict = (link) => (state) => {
     return inputLinks.length > 1 || outputLinks.length > 1
 }
 
+export const getStats = (state) => {
+    return {
+        patchbay: {
+            inputs: Object.values(state.links).filter(lnk => !!lnk.patchbay).length,
+            outputs: Object.values(state.links).filter(lnk => !!lnk.patchbay).length,
+        }
+    }
+}
+
 export default linksSlice.reducer
 
 function linkKey (link) {
