@@ -13,6 +13,7 @@ import {
 export function DeviceForm (props) {
     const { id, done = () => {} } = props;
     const newDevice = !id;
+    // eslint-disable-next-line
     const device = useSelector(selectDevice(id)) || {}
     const [deviceData, setDeviceData] = useState(device)
     const dispatch = useDispatch()
