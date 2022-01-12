@@ -1,0 +1,30 @@
+name: Studio Manager Build
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  build_deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '17'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - name: FTP Deployer
+        uses: sand4rt/ftp-deployer@v1.3
+        with:
+          sftp: true # optional
+          host: moddoc.net # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
+          port: 22 # optional, default is: 21
+          username: ${{ secrets.FTP_USER }} # FTP username
+          password: ${{ secrets.FTP_PASSWORD }} # FTP password
+          remote_folder: moddoc.net/matrix/ # optional, remote path of your FTP server
+          local_folder: build # optional, local path, default is: dist
+          exclude: '["node_modules/**", ".git/**", "*.env"]'
+          cleanup: true
+          pasive: true # optional
